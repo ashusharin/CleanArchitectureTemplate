@@ -1,6 +1,8 @@
 package com.shusharin.cleanarchitecture.data.api
 
-class ApiClient {
+import javax.inject.Inject
+
+class ApiClient @Inject constructor(apiService: ServiceApi) {
     fun method() {
     }
 }
