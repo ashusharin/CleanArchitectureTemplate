@@ -15,8 +15,7 @@ import javax.inject.Singleton
 class RetrofitModule {
 
     // TODO: 02.12.2021 сохранить правильно
-    val BASE_URL = "https://api.nytimes.com"
-    val API_KEY = "7QCIZ4hf7Gu8OalDqfpk6qAbcZNtYKPr"
+    val BASE_URL = "https://fakestoreapi.com"
 
 
     @Singleton

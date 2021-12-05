@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <color name="pink_figma">#40BFFF</color>
+    <color name="red_figma">#FF4858</color>
+    <color name="white_figma">#BCDDFE</color>
+    <color name="brown_figma">#373737</color>
 </resources>
