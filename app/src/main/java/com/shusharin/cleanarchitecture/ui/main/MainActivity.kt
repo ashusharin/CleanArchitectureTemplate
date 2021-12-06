@@ -2,6 +2,7 @@ package com.shusharin.cleanarchitecture.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.shusharin.cleanarchitecture.R
@@ -20,6 +21,7 @@ class MainActivity() :
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_main)
         val fragment: Fragment = MainScreenFragment()
         val transaction = supportFragmentManager.beginTransaction()
