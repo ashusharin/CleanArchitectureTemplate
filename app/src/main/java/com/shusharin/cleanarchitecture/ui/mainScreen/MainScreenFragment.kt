@@ -1,7 +1,6 @@
 package com.shusharin.cleanarchitecture.ui.mainScreen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.shusharin.cleanarchitecture.R
 import com.shusharin.cleanarchitecture.data.di.App
-import com.shusharin.cleanarchitecture.data.di.DaggerAppComponent
+import com.shusharin.cleanarchitecture.databinding.FragmentMainScreenBinding
+import com.shusharin.cleanarchitecture.ui.mainScreen.recyclerView.Adapter
+import com.shusharin.cleanarchitecture.ui.mainScreen.recyclerView.category.CategoryAdapter
 import com.shusharin.cleanarchitecture.utils.ViewModelFactory
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -22,8 +21,6 @@ import javax.inject.Inject
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
-
 
 
 class MainScreenFragment : Fragment() {
@@ -37,10 +34,16 @@ class MainScreenFragment : Fragment() {
     private val appComponent by lazy {
         (activity?.application as App).appComponent
     }
+    private lateinit var adapterProduct: Adapter
+    private lateinit var adapterCategory:  CategoryAdapter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var _binding: FragmentMainScreenBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -49,33 +52,43 @@ class MainScreenFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        Log.d("getAllProduct", "onCreate check" )
-
-
-
-//        flow.onEach {
-//            Log.d("getAllProduct", "collect - $it")
-//        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        _binding = FragmentMainScreenBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
+        setupRecyclerView()
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                val flow = viewModel.getProductList()
-                flow.onEach {
-                    Log.d("getAllProduct", "collect - $it")
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.listProduct.onEach {
+                    adapterProduct.productList = it
                 }.launchIn(this)
             }
         }
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_screen, container, false)
+        return root
 
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    fun setupRecyclerView() {
+        adapterProduct = Adapter()
+        binding.rvProductList.adapter = adapterProduct
+
+
+        adapterCategory = CategoryAdapter()
+        binding.rvCategoryList.adapter = adapterCategory
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

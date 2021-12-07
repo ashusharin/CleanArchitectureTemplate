@@ -25,7 +25,7 @@ class MainActivity() :
         setContentView(R.layout.activity_main)
         val fragment: Fragment = MainScreenFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_Container, fragment).commit()
+        transaction.replace(R.id.fragment_Container, fragment).commit()
     }
 
 }

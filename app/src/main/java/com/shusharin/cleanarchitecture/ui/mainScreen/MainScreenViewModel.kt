@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class MainScreenViewModel @Inject constructor( private val getAllProductUseCase: GetAllProductUseCase): ViewModel() {
 
-
+var listProduct = getAllProductUseCase()
 
     fun getProductList():Flow<List<Product>>{
         Log.d("getAllProduct", "ViewModel check" )
