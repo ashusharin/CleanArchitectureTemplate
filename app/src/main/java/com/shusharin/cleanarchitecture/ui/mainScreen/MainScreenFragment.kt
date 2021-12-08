@@ -35,11 +35,10 @@ class MainScreenFragment : Fragment() {
         (activity?.application as App).appComponent
     }
     private lateinit var adapterProduct: Adapter
-    private lateinit var adapterCategory:  CategoryAdapter
+    private lateinit var adapterProductMegaSale: Adapter
+    private lateinit var adapterProductStock: Adapter
+    private lateinit var adapterCategory: CategoryAdapter
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     private var _binding: FragmentMainScreenBinding? = null
     private val binding get() = _binding!!
@@ -48,10 +47,6 @@ class MainScreenFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -65,7 +60,9 @@ class MainScreenFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.listProduct.onEach {
-                    adapterProduct.productList = it
+                    adapterProduct.productList = it.take(10)
+                    adapterProductStock.productList = it.drop(10)
+                    adapterProductMegaSale.productList = it.takeLast(8)
                 }.launchIn(this)
             }
         }
@@ -74,38 +71,27 @@ class MainScreenFragment : Fragment() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // TODO: 07.12.2021 реализовать сохранение списка продуктов
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    fun setupRecyclerView() {
+    private fun setupRecyclerView() {
         adapterProduct = Adapter()
         binding.rvProductList.adapter = adapterProduct
 
+        adapterProductStock = Adapter()
+        binding.rvProductListStock.adapter = adapterProductStock
+
+        adapterProductMegaSale = Adapter()
+        binding.rvProductListMegasale.adapter = adapterProductMegaSale
 
         adapterCategory = CategoryAdapter()
         binding.rvCategoryList.adapter = adapterCategory
-    }
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainScreenFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainScreenFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

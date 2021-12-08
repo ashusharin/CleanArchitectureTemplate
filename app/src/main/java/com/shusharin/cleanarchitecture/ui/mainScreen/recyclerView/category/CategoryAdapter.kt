@@ -20,7 +20,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val binding = holder.binding
         getView(position, holder)
 
     }
