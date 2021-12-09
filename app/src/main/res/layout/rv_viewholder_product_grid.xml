@@ -34,6 +34,7 @@
                 android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                style="@style/RecyclerViewTitleStyle"
                 app:layout_constraintBottom_toTopOf="@id/tv_price_vh"
                 android:layout_marginTop="8dp"/>
 
@@ -46,6 +47,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="8dp"
                 android:text="$ Цена"
+                style="@style/RecyclerViewPriceStyle"
                 />
 
 

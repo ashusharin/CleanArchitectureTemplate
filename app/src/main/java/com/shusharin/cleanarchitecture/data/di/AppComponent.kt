@@ -5,6 +5,7 @@ import com.shusharin.cleanarchitecture.data.datasource.local.LocalDataSource
 import com.shusharin.cleanarchitecture.data.datasource.local.LocalDataSourceImpl
 import com.shusharin.cleanarchitecture.data.datasource.remote.RemoteDataSource
 import com.shusharin.cleanarchitecture.data.datasource.remote.RemoteDataSourceImpl
+import com.shusharin.cleanarchitecture.ui.detailScreen.DetailFragment
 import com.shusharin.cleanarchitecture.ui.main.MainActivity
 import com.shusharin.cleanarchitecture.ui.mainScreen.MainScreenFragment
 import dagger.Binds
@@ -19,6 +20,7 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
     fun inject(mainScreenFragment: MainScreenFragment)
+    fun inject(detailFragment: DetailFragment)
 
     @Component.Factory
     interface AppComponentFactory {

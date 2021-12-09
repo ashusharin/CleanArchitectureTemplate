@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="11dp"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="@id/promotion_CV"
+        app:layout_constraintTop_toTopOf="@id/promotion_CV">
+
+        <TextView
+            android:id="@+id/title_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Акция на кроссовки"
+            style="@style/OfferImageStyle"/>
+
+        <TextView
+            android:id="@+id/title_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Скидки до 80%"
+            style="@style/OfferImageStyle"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/promotion_CV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:elevation="10dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,6 +52,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/promotion_image" />
-    </androidx.cardview.widget.CardView>
 
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
