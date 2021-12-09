@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.shusharin.cleanarchitecture.data.di.App
 import com.shusharin.cleanarchitecture.databinding.FragmentMainScreenBinding
+import com.shusharin.cleanarchitecture.ui.mainScreen.pager.PagerAdapter
 import com.shusharin.cleanarchitecture.ui.mainScreen.recyclerView.Adapter
 import com.shusharin.cleanarchitecture.ui.mainScreen.recyclerView.category.CategoryAdapter
 import com.shusharin.cleanarchitecture.utils.ViewModelFactory
@@ -38,6 +39,8 @@ class MainScreenFragment : Fragment() {
     private lateinit var adapterProductMegaSale: Adapter
     private lateinit var adapterProductStock: Adapter
     private lateinit var adapterCategory: CategoryAdapter
+
+    private lateinit var pagerAdapter: PagerAdapter
 
 
     private var _binding: FragmentMainScreenBinding? = null
@@ -93,5 +96,8 @@ class MainScreenFragment : Fragment() {
 
         adapterCategory = CategoryAdapter()
         binding.rvCategoryList.adapter = adapterCategory
+
+        pagerAdapter = PagerAdapter()
+        binding.pagerOffer.adapter = pagerAdapter
     }
 }
