@@ -4,7 +4,7 @@ E-shop app with fake data
 
 Проект в процессе разработки.
 
-![alt text](Main screen.png "Главный экран")
+![alt text](/Main screen.png)
 
 Todo:
 - Карточка товара  отдельном фрагменте
